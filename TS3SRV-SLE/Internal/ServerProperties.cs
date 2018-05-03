@@ -7,22 +7,28 @@ namespace TS3SRV_SLE.Internal
 {
     public class ServerProperties
     {
-        [Option(Required = true, HelpText = "Name of the server")]
-        public string Name { get; set; }
-
-        [Option(Required = true, HelpText = "Port of the server")]
+        [Option("port", Required = false, Default = 9987, HelpText = "Port of the server")]
         public int Port { get; set; }
 
-        [Option(Required = true, HelpText = "Number of slots")]
+        [Option('n', "name", Required = false, Default = "TS3SRV-SLE", HelpText = "Name of the server")]
+        public string Name { get; set; }
+
+        [Option("slots", Required = false, Default = 512, HelpText = "Number of slots")]
         public int Slots { get; set; }
 
-        [Option(Required = true, HelpText = "Number of connected clients")]
+        [Option("clients", Required = false, Default = 98, HelpText = "Number of connected clients")]
         public int Clients { get; set; }
 
-        [Option('p', "ispasswordprotected", Default = false, Required = true)]
+        [Option('p', "ispasswordprotected", Default = false, Required = false)]
         public bool IsPasswordProtected { get; set; }
 
-        [Option('c', "cancreatechannels", Default = false, Required = true)]
+        [Option('c', "cancreatechannels", Default = true, Required = false)]
         public bool CanCreateChannels { get; set; }
+
+        [Option("binding", Default = "0.0.0.0", Required = false)]
+        public string Binding { get; set; }
+
+        [Option("weblist", Default = "weblist.teamspeak.com:2010", Required = false)]
+        public string Weblist { get; set; }
     }
 }

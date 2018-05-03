@@ -2,9 +2,6 @@
 {
     public class Properties
     {
-        public static readonly string TS3SRV_WEBLISTURL = "weblist.teamspeak.com";
-        public static readonly int TS3SRV_WEBLISTPORT = 2010;
-
         public static readonly int TS3SRV_WEBLIST_PROTOCOL_HEADERLEN = 4;
         public static readonly int TS3SRV_WEBLIST_PROTOCOL_AUTHKEYLEN = 4;
 

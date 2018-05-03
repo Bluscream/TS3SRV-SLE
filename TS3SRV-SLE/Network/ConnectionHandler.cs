@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
@@ -9,8 +10,9 @@ namespace TS3SRV_SLE.Network
 {
     public class ConnectionHandler
     {
-        private IPAddress TS3SRV_WEBLIST_IP;
+        // private IPAddress TS3SRV_WEBLIST_IP;
         private IPEndPoint TS3SRV_WEBLIST_ENDPOINT;
+        private IPEndPoint TS3SRV_LOCAL_ENDPOINT;
 
         private Socket TS3SRV_WEBLIST_SOCKET;
 
@@ -18,14 +20,17 @@ namespace TS3SRV_SLE.Network
 
         private static readonly Logger Logger = LogManager.GetLogger(Properties.TS3SRV_LOGGER_NAME);
 
-        public ConnectionHandler()
+        public ConnectionHandler(ServerProperties serverProperties)
         {
             try
             {
-                TS3SRV_WEBLIST_IP = Dns.GetHostAddresses(Properties.TS3SRV_WEBLISTURL)[0];
-                TS3SRV_WEBLIST_ENDPOINT = new IPEndPoint(TS3SRV_WEBLIST_IP, Properties.TS3SRV_WEBLISTPORT);
-
+                string[] tokens = serverProperties.Weblist.Split(':');
+                IPAddress[] TS3SRV_WEBLIST_IP = Dns.GetHostAddresses(tokens.First());
+                TS3SRV_WEBLIST_ENDPOINT = new IPEndPoint(TS3SRV_WEBLIST_IP.First(), int.Parse(tokens.ElementAt(1)));
+                // IPAddress TS3SRV_LOCAL_IP = Dns.GetHostAddresses();
+                IPEndPoint TS3SRV_LOCAL_ENDPOINT = new IPEndPoint(IPAddress.Parse(serverProperties.Binding), 0);
                 TS3SRV_WEBLIST_SOCKET = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                TS3SRV_WEBLIST_SOCKET.Bind(TS3SRV_LOCAL_ENDPOINT);
             }
             catch
             {

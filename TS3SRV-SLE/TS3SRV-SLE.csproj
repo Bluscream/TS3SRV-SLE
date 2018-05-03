@@ -1,14 +1,31 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RootNamespace>TS3SRV_SLE</RootNamespace>
+    <Description>Teamspeak 3 Server List Emulator</Description>
+    <RepositoryUrl>https://github.com/R4P3NET/TS3SRV-SLE</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/R4P3NET/TS3SRV-SLE/blob/master/LICENSE</PackageLicenseUrl>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <StartupObject>TS3SRV_SLE.Emulator</StartupObject>
+    <ApplicationIcon />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <OutputPath>bin\Release\</OutputPath>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.2.1" />
+    <PackageReference Include="ini-parser" Version="2.5.2" />
     <PackageReference Include="NLog.Extensions.Logging" Version="1.0.0-rtm-rc6" />
+    <PackageReference Include="NuGet.CommandLine" Version="4.6.2" />
   </ItemGroup>
 
   <ItemGroup>

@@ -23,7 +23,7 @@ namespace TS3SRV_SLE.Network
 
         public PayloadProcessor(ServerProperties serverProperties)
         {
-            CHandler = new ConnectionHandler() { HandleIncoming = OnIncoming };
+            CHandler = new ConnectionHandler(serverProperties) { HandleIncoming = OnIncoming };
             CHandler.InitializeConnection();
             _serverProperties = serverProperties;
             TS3SRV_WEBLIST_AUTHKEY = new byte[4];
